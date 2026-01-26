@@ -15,6 +15,9 @@ add_executable(file_indexer
 
 target_sources(file_indexer PRIVATE
     src/index.cpp
+    src/cli.cpp
+    src/query.cpp
+    src/scan.cpp
 )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")

@@ -1,0 +1,17 @@
+#pragma once
+#include <string>
+#include <cstdint>
+
+struct Options {
+    std::string extension;
+    std::string name_substring;
+    uintmax_t min_size = 0;
+    uintmax_t max_size = UINTMAX_MAX;
+    size_t limit = 50;
+};
+
+// Parses argv into Options. Exits program on error or --help.
+Options parse_args(int argc, char* argv[]);
+
+// Prints usage and CLI contract
+void print_help();

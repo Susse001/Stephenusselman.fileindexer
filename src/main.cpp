@@ -1,71 +1,43 @@
-#include <filesystem>
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <index.hpp>
-
-namespace fs = std::filesystem;
-
-static void scan_directory(
-    const fs::path& root,
-    std::vector<FileRecord>& records)
-{
-    std::error_code ec;
-
-    for (fs::recursive_directory_iterator it(root, fs::directory_options::skip_permission_denied, ec);
-         it != fs::recursive_directory_iterator();
-         it.increment(ec))
-    {
-        if (ec) {
-            ec.clear();
-            continue;
-        }
-
-        const fs::directory_entry& entry = *it;
-
-        FileRecord record{
-            entry.path(),
-            entry.is_regular_file(ec) ? entry.file_size(ec) : 0,
-            entry.is_directory(ec)
-        };
-
-        records.push_back(record);
-    }
-}
+#include <filesystem>
+#include "cli.hpp"
+#include "scan.hpp"
+#include "query.hpp"
+#include "index.hpp"
 
 int main(int argc, char* argv[])
 {
-    if (argc < 2)
-    {
-        std::cout << "Usage: file_indexer <directory>\n";
+    if (argc < 2) {
+        print_help();
         return 1;
     }
 
-    fs::path root{argv[1]};
+    std::filesystem::path root = argv[1];
 
-    if (!fs::exists(root))
-    {
-        std::cerr << "Path does not exist\n";
-        return 1;
-    }
-
+    // Scan filesystem
     std::vector<FileRecord> records;
     scan_directory(root, records);
+    std::cout << "Indexed files: " << records.size() << '\n';
 
-    std::cout << "Indexed files: " << records.size() << "\n";
-
+    // Build FileIndex
     FileIndex index{std::move(records)};
 
-    auto exe_files = index.find_by_extension(".exe");
-    std::cout << "EXE files: " << exe_files.size() << '\n';
+    // Parse CLI options
+    Options opts = parse_args(argc, argv);
 
-    auto file_contains = index.find_by_name("log");
-    std::cout << "Files containing 'log': " << file_contains.size() << '\n';
+    // Apply filters
+    auto results = run_query(index, opts);
 
-    auto large = index.find_by_size(100 * 1024 * 1024, UINTMAX_MAX);
-    std::cout << "Files >100MB: " << large.size() << '\n';
+    // Print results (limited output)
+    size_t count = 0;
+    for (const auto* r : results) {
+        if (count++ >= opts.limit) break;
+        std::cout << r->path.string() << '\n';
+    }
+
+    std::cout << "Results shown: "
+              << std::min(results.size(), opts.limit)
+              << " / " << results.size() << '\n';
 
     return 0;
 }
-

@@ -69,6 +69,36 @@ build CMakeFiles\file_indexer.dir\src\index.cpp.obj: CXX_COMPILER__file_indexer_
   TARGET_PDB = file_indexer.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\file_indexer.dir
 
+build CMakeFiles\file_indexer.dir\src\cli.cpp.obj: CXX_COMPILER__file_indexer_unscanned_Debug C$:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\src\cli.cpp || cmake_object_order_depends_target_file_indexer
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd -Wall -Wextra -Wpedantic -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-unsafe-buffer-usage -Wno-padded
+  INCLUDES = -IC:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\include
+  OBJECT_DIR = CMakeFiles\file_indexer.dir
+  OBJECT_FILE_DIR = CMakeFiles\file_indexer.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\file_indexer.dir\
+  TARGET_PDB = file_indexer.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\file_indexer.dir
+
+build CMakeFiles\file_indexer.dir\src\query.cpp.obj: CXX_COMPILER__file_indexer_unscanned_Debug C$:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\src\query.cpp || cmake_object_order_depends_target_file_indexer
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd -Wall -Wextra -Wpedantic -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-unsafe-buffer-usage -Wno-padded
+  INCLUDES = -IC:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\include
+  OBJECT_DIR = CMakeFiles\file_indexer.dir
+  OBJECT_FILE_DIR = CMakeFiles\file_indexer.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\file_indexer.dir\
+  TARGET_PDB = file_indexer.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\file_indexer.dir
+
+build CMakeFiles\file_indexer.dir\src\scan.cpp.obj: CXX_COMPILER__file_indexer_unscanned_Debug C$:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\src\scan.cpp || cmake_object_order_depends_target_file_indexer
+  CONFIG = Debug
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd -Wall -Wextra -Wpedantic -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-unsafe-buffer-usage -Wno-padded
+  INCLUDES = -IC:\Users\Stephen\Documents\C++\Stephenusselman.fileindexer\include
+  OBJECT_DIR = CMakeFiles\file_indexer.dir
+  OBJECT_FILE_DIR = CMakeFiles\file_indexer.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\file_indexer.dir\
+  TARGET_PDB = file_indexer.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\file_indexer.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target file_indexer
@@ -77,7 +107,7 @@ build CMakeFiles\file_indexer.dir\src\index.cpp.obj: CXX_COMPILER__file_indexer_
 #############################################
 # Link the executable file_indexer.exe
 
-build file_indexer.exe: CXX_EXECUTABLE_LINKER__file_indexer_Debug CMakeFiles\file_indexer.dir\src\main.cpp.obj CMakeFiles\file_indexer.dir\src\index.cpp.obj
+build file_indexer.exe: CXX_EXECUTABLE_LINKER__file_indexer_Debug CMakeFiles\file_indexer.dir\src\main.cpp.obj CMakeFiles\file_indexer.dir\src\index.cpp.obj CMakeFiles\file_indexer.dir\src\cli.cpp.obj CMakeFiles\file_indexer.dir\src\query.cpp.obj CMakeFiles\file_indexer.dir\src\scan.cpp.obj
   CONFIG = Debug
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
