@@ -1,5 +1,12 @@
 # ninja log v7
-2	519	7909927010834012	CMakeFiles/file_indexer.dir/src/main.cpp.obj	487408e0fe1319e6
-520	888	7909927016026904	file_indexer.exe	296b45feda8ff085
-6	523	7909938023700556	CMakeFiles/file_indexer.dir/src/main.cpp.obj	9960e02d03088e05
-524	868	7909938028875251	file_indexer.exe	296b45feda8ff085
+13	2134	7911435868728455	CMakeFiles/file_indexer.dir/src/main.cpp.obj	a1dcc1c3e2464868
+1700	1918	7909951358518966	file_indexer.exe	296b45feda8ff085
+3	1705	7911436942281495	CMakeFiles/file_indexer.dir/src/index.cpp.obj	58dc196ed277c82c
+1706	1995	7911436959309915	file_indexer.exe	cbf94851227bd07d
+19	1960	7911442414003599	CMakeFiles/file_indexer.dir/src/index.cpp.obj	58dc196ed277c82c
+1961	2196	7911442433409599	file_indexer.exe	cbf94851227bd07d
+19	1705	7911443456594334	CMakeFiles/file_indexer.dir/src/main.cpp.obj	a1dcc1c3e2464868
+1706	1945	7911443473465451	file_indexer.exe	cbf94851227bd07d
+19	1735	7911445179812578	CMakeFiles/file_indexer.dir/src/main.cpp.obj	a1dcc1c3e2464868
+25	1750	7911445179872592	CMakeFiles/file_indexer.dir/src/index.cpp.obj	58dc196ed277c82c
+1751	1986	7911445197117724	file_indexer.exe	cbf94851227bd07d
