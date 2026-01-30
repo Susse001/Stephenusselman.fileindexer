@@ -8,8 +8,10 @@ FileIndex::FileIndex(std::vector<FileRecord> records)
 {
     for (const auto& record : records_) {
         if (!record.is_directory) {
-            std::string ext = record.path.extension().string();
-            by_extension_[ext].push_back(&record);
+            const FileRecord* ptr = std::addressof(record);
+
+            by_extension_[record.path.extension().string()].push_back(ptr);
+            by_filename_[record.path.filename().native()].push_back(ptr);
         }
     }
 }
@@ -43,6 +45,16 @@ FileIndex::find_by_name(const std::string& substring) const
     }
 
     return results;
+}
+
+std::vector<const FileRecord*>
+FileIndex::find_by_exact_name(const std::wstring& name) const
+{
+    auto it = by_filename_.find(name);
+    if (it == by_filename_.end()) {
+        return {};
+    }
+    return it->second;
 }
 
 std::vector<const FileRecord*>

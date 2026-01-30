@@ -23,7 +23,7 @@
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ..."
 				}
 			],
 			"type" : "STRING",
@@ -176,6 +176,18 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "C:/Program Files/LLVM/bin/llvm-ranlib.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_Compiler",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : "clang++"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",

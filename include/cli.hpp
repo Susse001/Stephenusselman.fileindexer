@@ -1,9 +1,11 @@
 #pragma once
+
 #include <string>
 #include <cstdint>
 
 struct Options {
     std::string extension;
+    std::wstring exact_name;
     std::string name_substring;
     uintmax_t min_size = 0;
     uintmax_t max_size = UINTMAX_MAX;
