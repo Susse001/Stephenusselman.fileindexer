@@ -2,6 +2,7 @@
 
 #include <string>
 #include <cstdint>
+#include <filesystem>
 
 struct Options {
     std::string extension;
@@ -10,6 +11,8 @@ struct Options {
     uintmax_t min_size = 0;
     uintmax_t max_size = UINTMAX_MAX;
     size_t limit = 50;
+
+    std::filesystem::path index_path;
 };
 
 // Parses argv into Options. Exits program on error or --help.

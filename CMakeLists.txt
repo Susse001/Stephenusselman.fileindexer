@@ -18,6 +18,9 @@ target_sources(file_indexer PRIVATE
     src/cli.cpp
     src/query.cpp
     src/scan.cpp
+    src/file_record.cpp
+    src/index_io.cpp
+    src/index_file.cpp
 )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")

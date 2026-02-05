@@ -11,6 +11,7 @@
 class FileIndex {
 public:
     explicit FileIndex(std::vector<FileRecord> records);
+    const std::vector<FileRecord>& records() const { return records_; }
 
     std::vector<const FileRecord*> find_by_extension(const std::string& ext) const;
     std::vector<const FileRecord*> find_by_exact_name(const std::wstring& name) const;

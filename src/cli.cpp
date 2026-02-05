@@ -29,6 +29,9 @@ Options parse_args(int argc, char* argv[])
         else if (arg == "--limit" && i + 1 < argc) {
             opts.limit = std::stoull(argv[++i]);
         }
+        else if (arg == "--index" && i + 1 < argc) {
+        opts.index_path = std::filesystem::path(argv[++i]);
+        }
         else if (arg == "--help") {
             print_help();
             std::exit(0);
@@ -54,5 +57,6 @@ void print_help()
         << "  --min-size <bytes>    Filter by minimum file size\n"
         << "  --max-size <bytes>    Filter by maximum file size\n"
         << "  --limit <N>           Limit number of results shown (default 50)\n"
+        << "  --index <path>        Path to index file for caching results\n"
         << "  --help                Show this help message\n";
 }
