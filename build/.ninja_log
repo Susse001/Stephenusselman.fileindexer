@@ -17,3 +17,7 @@
 2104	2331	7920257191795675	file_indexer.exe	b5bcd56c09765946
 33	1796	7920259810822139	CMakeFiles/file_indexer.dir/src/main.cpp.obj	a1dcc1c3e2464868
 1797	2007	7920259828465861	file_indexer.exe	b5bcd56c09765946
+107	2235	7924583380606693	CMakeFiles/file_indexer.dir/src/cli.cpp.obj	80bad7a63d4ed79a
+111	2258	7924583380656704	CMakeFiles/file_indexer.dir/src/query.cpp.obj	858197d0a9d9c667
+46	2384	7924583380006695	CMakeFiles/file_indexer.dir/src/main.cpp.obj	a1dcc1c3e2464868
+2384	2904	7924583403381871	file_indexer.exe	b5bcd56c09765946

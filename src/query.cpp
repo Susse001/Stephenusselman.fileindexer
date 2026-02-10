@@ -34,6 +34,30 @@ std::vector<const FileRecord*> run_query(
             results.end());
     }
 
+    // Apply modification time filters
+    if (opts.modified_after || opts.modified_before) {
+        results.erase(
+            std::remove_if(results.begin(), results.end(),
+                [&](const FileRecord* r) {
+                    if (r->is_directory) {
+                        return true;
+                    }
+
+                    if (opts.modified_after &&
+                        r->last_write_time <= *opts.modified_after) {
+                        return true;
+                    }
+
+                    if (opts.modified_before &&
+                        r->last_write_time >= *opts.modified_before) {
+                        return true;
+                    }
+
+                    return false;
+                }),
+            results.end());
+    }
+
     // Apply substring filter last (always expensive)
     if (!opts.name_substring.empty()) {
         std::wstring needle(opts.name_substring.begin(), opts.name_substring.end());

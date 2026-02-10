@@ -13,6 +13,9 @@ struct Options {
     size_t limit = 50;
 
     std::filesystem::path index_path;
+
+    std::optional<int64_t> modified_after;
+    std::optional<int64_t> modified_before;
 };
 
 // Parses argv into Options. Exits program on error or --help.

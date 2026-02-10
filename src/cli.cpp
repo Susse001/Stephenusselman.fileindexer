@@ -26,6 +26,12 @@ Options parse_args(int argc, char* argv[])
         else if (arg == "--max-size" && i + 1 < argc) {
             opts.max_size = std::stoull(argv[++i]);
         }
+        else if (arg == "--modified-after" && i + 1 < argc) {
+        opts.modified_after = std::stoll(argv[++i]);
+        }
+        else if (arg == "--modified-before" && i + 1 < argc) {
+            opts.modified_before = std::stoll(argv[++i]);
+        }
         else if (arg == "--limit" && i + 1 < argc) {
             opts.limit = std::stoull(argv[++i]);
         }
@@ -56,6 +62,8 @@ void print_help()
         << "  --name <substring>    Filter by filename substring (case-insensitive)\n"
         << "  --min-size <bytes>    Filter by minimum file size\n"
         << "  --max-size <bytes>    Filter by maximum file size\n"
+        << "  --modified-after <epoch>   Files modified after this Unix timestamp\n"
+        << "  --modified-before <epoch>  Files modified before this Unix timestamp\n"
         << "  --limit <N>           Limit number of results shown (default 50)\n"
         << "  --index <path>        Path to index file for caching results\n"
         << "  --help                Show this help message\n";
