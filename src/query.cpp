@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <cwctype>
 #include <string>
+#include <regex>
+#include <stdexcept>
 
 std::vector<const FileRecord*> run_query(
     const FileIndex& index,
@@ -58,7 +60,7 @@ std::vector<const FileRecord*> run_query(
             results.end());
     }
 
-    // Apply substring filter last (always expensive)
+    // Apply substring filter
     if (!opts.name_substring.empty()) {
         std::wstring needle(opts.name_substring.begin(), opts.name_substring.end());
         std::transform(needle.begin(), needle.end(), needle.begin(), ::towlower);
@@ -69,6 +71,27 @@ std::vector<const FileRecord*> run_query(
                     std::wstring name = r->path.filename().native();
                     std::transform(name.begin(), name.end(), name.begin(), ::towlower);
                     return name.find(needle) == std::wstring::npos;
+                }),
+            results.end());
+    }
+
+    // Apply regex filter
+    if (opts.name_regex) {
+        std::regex rx;
+
+        try {
+            rx = std::regex(*opts.name_regex, std::regex::ECMAScript | std::regex::icase);
+        } catch (const std::regex_error& e) {
+            throw std::runtime_error(
+                "Invalid regex pattern: " + *opts.name_regex);
+        }
+
+        results.erase(
+            std::remove_if(results.begin(), results.end(),
+                [&](const FileRecord* r) {
+                    const std::wstring name = r->path.filename().native();
+                    const std::string narrow(name.begin(), name.end());
+                    return !std::regex_search(narrow, rx);
                 }),
             results.end());
     }

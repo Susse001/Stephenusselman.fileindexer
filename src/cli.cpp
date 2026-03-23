@@ -32,6 +32,9 @@ Options parse_args(int argc, char* argv[])
         else if (arg == "--modified-before" && i + 1 < argc) {
             opts.modified_before = std::stoll(argv[++i]);
         }
+        else if (arg == "--name-regex" && i + 1 < argc) {
+        opts.name_regex = argv[++i];
+        }
         else if (arg == "--limit" && i + 1 < argc) {
             opts.limit = std::stoull(argv[++i]);
         }
@@ -60,6 +63,7 @@ void print_help()
         << "  --exact-name <name>    Match exact filename (most selective)\n"
         << "  --ext <extension>     Filter by file extension (e.g., .exe)\n"
         << "  --name <substring>    Filter by filename substring (case-insensitive)\n"
+        << "  --name-regex <pattern> Match filename using regex (ECMAScript)\n"
         << "  --min-size <bytes>    Filter by minimum file size\n"
         << "  --max-size <bytes>    Filter by maximum file size\n"
         << "  --modified-after <epoch>   Files modified after this Unix timestamp\n"
