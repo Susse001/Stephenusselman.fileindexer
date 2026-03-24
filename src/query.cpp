@@ -5,22 +5,36 @@
 #include <regex>
 #include <stdexcept>
 
+/**
+ * Runs a query against the FileIndex using the provided Options.
+ *
+ * Query strategy:
+ * 1. Use most selective indexed lookup if available
+ *    - Exact filename
+ *    - Extension
+ * 2. Otherwise perform size-based scan
+ * 3. Apply additional filters:
+ *    - Size range
+ *    - Modification time
+ *    - Substring match
+ *    - Regex match
+ * 4. Sort results for deterministic output
+ */
 std::vector<const FileRecord*> run_query(
     const FileIndex& index,
     const Options& opts)
 {
     std::vector<const FileRecord*> results;
 
-    // 1. Exact filename (most restrictive)
+    // 1. Use most selective indexed lookup
     if (!opts.exact_name.empty()) {
         results = index.find_by_exact_name(opts.exact_name);
     }
-    // 2. Extension
     else if (!opts.extension.empty()) {
         results = index.find_by_extension(opts.extension);
     }
-    // 3. Fallback: size scan
     else {
+        // Fallback: size scan
         results = index.find_by_size(opts.min_size, opts.max_size);
     }
 
@@ -60,7 +74,7 @@ std::vector<const FileRecord*> run_query(
             results.end());
     }
 
-    // Apply substring filter
+    // Apply case-insensitive substring filter
     if (!opts.name_substring.empty()) {
         std::wstring needle(opts.name_substring.begin(), opts.name_substring.end());
         std::transform(needle.begin(), needle.end(), needle.begin(), ::towlower);
@@ -80,8 +94,9 @@ std::vector<const FileRecord*> run_query(
         std::regex rx;
 
         try {
-            rx = std::regex(*opts.name_regex, std::regex::ECMAScript | std::regex::icase);
-        } catch (const std::regex_error& e) {
+            rx = std::regex(*opts.name_regex,
+                            std::regex::ECMAScript | std::regex::icase);
+        } catch (const std::regex_error&) {
             throw std::runtime_error(
                 "Invalid regex pattern: " + *opts.name_regex);
         }
@@ -96,7 +111,7 @@ std::vector<const FileRecord*> run_query(
             results.end());
     }
 
-    // Deterministic output
+    // Sort results by path for deterministic output
     std::sort(results.begin(), results.end(),
         [](const FileRecord* a, const FileRecord* b) {
             return a->path < b->path;
